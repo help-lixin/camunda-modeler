@@ -1,52 +1,80 @@
+:root {
+  --linting-issue-error-background-color: var(--color-red-360-100-97);
+  --linting-issue-error-border-color: var(--color-red-360-100-45);
+
+  --linting-issue-warning-background-color: var(--color-yellow-47-86-91);
+  --linting-issue-warning-border-color: var(--color-yellow-47-88-53);
+
+  --linting-issue-padding: 8px;
+}
+
 :local(.LintingIssue) {
   display: flex;
-  align-items: flex-start;
-  padding: 3px 8px 3px 8px;
+  align-items: stretch;
   border-bottom: solid 1px var(--color-grey-225-10-95);
+  font-size: 14px;
+  cursor: default;
 
   &:last-child {
     border-bottom: none;
   }
 
-  .linting-issue__icon {
-    height: 20px;
+  * {
+    user-select: text;
+  }
+
+  .linting-issue__header {
+    display: flex;
+    align-items: flex-start;
+    width: 200px;
+    padding: var(--linting-issue-padding);
 
     svg {
-      fill: var(--color-red-360-100-45);
-      margin-right: 8px;
-      width: 20px;
-      height: 20px;
+      margin-top: 1px;
+    }
+
+    .linting-issue__label {
+      display: inline-block;
+      max-width: 150px;
+      overflow: hidden;
+      margin-left: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-weight: bold;
     }
   }
 
-  .linting-issue__text {
-    font-size: 14px;
-    line-height: 20px;
-    user-select: text;
-
-    * {
-      user-select: text;
+  &.linting-issue--error {
+    .linting-issue__header {
+      background-color: var(--linting-issue-error-background-color);
+      border-left: solid 3px var(--linting-issue-error-border-color);
     }
 
-    .linting-issue__link {
-      display: inline-block;
-      vertical-align: bottom;
-      max-width: 200px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      background-color: var(--color-blue-205-100-95);
-      border-radius: 4px;
-      margin-left: 4px;
-      margin-right: 4px;
-      padding: 0px 4px;
-      cursor: default;
-  
-      &:hover {
-        background-color: var(--color-blue-205-100-50);
-        color: var(--color-white);
+    &.linting-issue--selected,
+    &:hover {
+      .linting-issue__content {
+        background-color: var(--linting-issue-error-background-color);
       }
     }
   }
 
+  &.linting-issue--warning {
+    .linting-issue__header {
+      background-color: var(--linting-issue-warning-background-color);
+      border-left: solid 3px var(--linting-issue-warning-border-color);
+    }
+
+    &.linting-issue--selected,
+    &:hover {
+      .linting-issue__content {
+        background-color: var(--linting-issue-warning-background-color);
+      }
+    }
+  }
+
+  .linting-issue__content {
+    display: flex;
+    width: calc(100% - 200px);
+    padding: var(--linting-issue-padding);
+  }
 }
