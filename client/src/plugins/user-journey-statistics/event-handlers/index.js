@@ -11,9 +11,11 @@
 import DeploymentEventHandler from './DeploymentEventHandler';
 import LinkEventHandler from './LinkEventHandler';
 import TabEventHandler from './TabEventHandler';
+import FormEditorEventHandler from './FormEditorEventHandler';
 
 export default [
   DeploymentEventHandler,
+  FormEditorEventHandler,
   LinkEventHandler,
   TabEventHandler
 ];
